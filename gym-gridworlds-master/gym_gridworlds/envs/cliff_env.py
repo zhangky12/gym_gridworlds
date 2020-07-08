@@ -26,6 +26,9 @@ class CliffEnv(gym.Env):
         self.S = self.S[0] + x, self.S[1] + y
         
         if self.S[0] < 0 or self.S[0] > self.height-1 or self.S[1] < 0 or self.S[1] > self.width-1:
+            self.S = max(0, self.S[0]), max(0, self.S[1])
+            self.S = (min(self.S[0], self.height - 1),
+                  min(self.S[1], self.width - 1))
             return self.S, -2, False, {}
 
         self.S = max(0, self.S[0]), max(0, self.S[1])
